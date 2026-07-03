@@ -6,6 +6,32 @@ to be retrained with the same cadence, necessitating an end-to-end pipeline that
 
 In this project you will build such a pipeline.
 
+## Project Links
+
+- **Weights & Biases project:** https://wandb.ai/jahid-rmit/nyc_airbnb
+- **GitHub repository:** https://github.com/HelloJahid/build-ml-pipeline-for-short-term-rental-prices
+
+## Releases
+
+- **1.0.0** — initial pipeline release (fails on `sample2.csv` due to out-of-NYC listings, caught by `test_proper_boundaries`)
+- **1.0.1** — adds a geographic boundary filter in `basic_cleaning`; runs successfully on `sample2.csv`
+
+## Model Performance
+
+The best model (`random_forest_export:prod`, trained with `max_tfidf_features=30` and
+`max_features=0.33`) achieved **MAE 33.80 / R² 0.565** on the validation set and
+**MAE 33.29 / R² 0.581** on the held-out test set. Test performance is comparable to
+validation performance, confirming the model does not overfit.
+
+## Possible Future Improvements
+
+- Extend the EDA with additional visualizations and cleaning steps (e.g. handling
+  `minimum_nights` outliers) to improve model performance.
+- Add an alternative model step (e.g. gradient boosting) and compare against the
+  Random Forest baseline.
+- Automate weekly retraining by triggering the released pipeline on a schedule when
+  new data arrives.
+
 ## Table of contents
 
 - [Introduction](#build-an-ML-Pipeline-for-Short-Term-Rental-Prices-in-NYC)
