@@ -43,6 +43,12 @@ def go(args):
     logger.info("Converting last_review to datetime")
     df["last_review"] = pd.to_datetime(df["last_review"])
 
+    # Drop rows whose coordinates fall outside the NYC boundaries.
+    # Added in v1.0.1: new data (sample2.csv) contained listings outside NYC,
+    # which correctly made the data_check step fail in v1.0.0.
+    idx = df['longitude'].between(-74.25, -73.50) & df['latitude'].between(40.5, 41.2)
+    df = df[idx].copy()
+
     logger.info("Cleaned data has %s rows and %s columns", *df.shape)
 
     # Save cleaned data
